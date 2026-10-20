@@ -35,13 +35,15 @@ Deploy the generated `dist/` directory to any static host. No API keys or backen
 
 The supplied prices, monthly instalments, stock statuses and promotion packages are mock data, explicitly labelled on the page. Update `src/data.js` after confirming actual offers. No financing approval is guaranteed. Official showroom hours were not provided, so the contact section directs visitors to confirm hours with the advisor.
 
-The profile uses an EA monogram because no advisor photo was supplied. Replace the `.avatar` content in `Hero.jsx` with an authorised portrait when available. The hero showroom image is an AI-generated illustration, not a photo of this specific showroom. Vehicle catalogue images were downloaded from Perodua's official website; confirm permission for public use. This is the advisor's personal site, not Perodua's corporate website.
+The hero and profile thumbnail use an AI-enhanced professional portrait based on the supplied photograph of En Aniq. The showroom background is generated, not a photograph of this specific showroom. Vehicle catalogue images were downloaded from Perodua's official website; confirm permission for public use. This is the advisor's personal site, not Perodua's corporate website.
 
 ## Assets
 
 Catalogue vehicle images: `https://www.perodua.com.my/assets/images/landing-page/cars/without-emblem/{model}-no-emblem.webp`, downloaded locally to `public/images/{model}-front.webp`.
 
-Hero image: built-in Image Gen, saved locally as `public/images/hero-showroom.webp`. Prompt: photorealistic cranberry-red Perodua Myvi, front three-quarter view in a modern Malaysian Perodua showroom, landscape, soft daylight, no people or advertising copy. The image's alt text identifies it as an illustration.
+Current hero portrait: built-in Image Gen edit of the supplied `aniq.jpeg`, saved locally as `public/images/aniq-professional.webp`. Professional lighting, a pressed gray Perodua shirt, a confident standing pose and an uncluttered showroom background. The full generation prompt is in [docs/portrait-generation.md](docs/portrait-generation.md). The original photograph is unchanged.
+
+The previous generated car hero is retained as `public/images/hero-showroom.webp` for optional reuse.
 
 Fonts are served by Google Fonts with local sans-serif fallbacks. The location card links to Google Maps with the verified showroom address. WhatsApp, phone, email and social links work without client-side service integrations.
 

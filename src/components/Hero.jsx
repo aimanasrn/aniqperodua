@@ -73,11 +73,11 @@ export default function Hero() {
       </Reveal>
       <Reveal className="advisor-card" delay={0.1}>
         <img
-          className="hero-car-image"
-          src="/images/hero-showroom.webp"
-          alt="Perodua Myvi merah di ruang pameran — imej ilustrasi"
-          width="1200"
-          height="800"
+          className="hero-advisor-image"
+          src="/images/aniq-professional.webp"
+          alt="Potret profesional En Aniq, Sales Advisor Perodua — dipertingkat dengan AI"
+          width="1536"
+          height="1024"
           fetchPriority="high"
         />
         <div className="experience-badge">
@@ -100,8 +100,15 @@ export default function Hero() {
           PSSB Kota Bharu 1<ArrowUpRight size={12} />
         </a>
         <div className="advisor-info">
-          <div className="avatar" role="img" aria-label="Monogram En Aniq">
-            E<span>A</span>
+          <div className="avatar" role="img" aria-label="Potret En Aniq">
+            <span className="avatar-photo">
+              <img
+                src="/images/aniq-professional.webp"
+                alt=""
+                width="57"
+                height="57"
+              />
+            </span>
             <span className="avatar-check">
               <Check size={10} strokeWidth={3} />
             </span>
