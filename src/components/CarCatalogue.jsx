@@ -4,11 +4,19 @@ import { ArrowRight, Check, Info, MessageCircle } from "lucide-react";
 import { cars, currency, whatsappUrl } from "../data";
 import { Reveal, SectionLabel } from "./UI";
 import { getRevealMotion } from "../lib/motion";
+import { Link } from "react-router";
+import { calculateLoan } from "../lib/loan";
 
 const filters = ["Semua", "Hatchback", "Sedan", "SUV", "MPV"];
 
 function CarCard({ car, index, filtered }) {
   const reduced = useReducedMotion();
+  const estimate = calculateLoan({
+    price: car.price,
+    deposit: car.price * 0.1,
+    years: 9,
+    annualRate: 3.2,
+  });
   const revealMotion = getRevealMotion(reduced, { delay: index * 0.025 });
   return (
     <motion.article
@@ -44,9 +52,13 @@ function CarCard({ car, index, filtered }) {
             <p className="car-category">{car.type}</p>
             <h3>Perodua {car.name}</h3>
           </div>
-          <span className="model-arrow" aria-hidden="true">
-            <ArrowRight size={20} />
-          </span>
+          <Link
+            className="model-arrow"
+            to={`/catalog/${car.id}`}
+            aria-label={`Lihat butiran Perodua ${car.name}`}
+          >
+            <ArrowRight size={20} aria-hidden="true" />
+          </Link>
         </div>
         <p className="car-tagline">{car.tagline}</p>
         <div className="car-features">
@@ -65,7 +77,7 @@ function CarCard({ car, index, filtered }) {
           <div>
             <span>Anggaran ansuran</span>
             <strong>
-              RM {car.monthly}
+              RM {currency(Math.round(estimate.monthly))}
               <small>/bulan</small>
             </strong>
           </div>
@@ -161,9 +173,10 @@ export default function CarCatalogue() {
       <Reveal as="p" className="catalogue-note">
         <Info size={14} />
         <span>
-          Harga, ansuran dan status stok ialah data contoh. Ansuran sebenar
-          tertakluk kepada varian, deposit, tempoh pembiayaan dan kelulusan
-          bank. Sahkan tawaran dengan En Aniq.
+          Harga rujukan atas jalan Semenanjung tanpa insurans, mengikut varian
+          asas. Ansuran ialah simulasi deposit 10%, 9 tahun dan kadar rata 3.2%.
+          Status stok ialah contoh. Sahkan harga, kelengkapan dan stok dengan En
+          Aniq.
         </span>
       </Reveal>
     </section>

@@ -1,10 +1,10 @@
-export const DEFAULT_CAR_MODELS = [
-  { id: "myvi", name: "Myvi", price: 46500 },
-  { id: "bezza", name: "Bezza", price: 35800 },
-  { id: "axia", name: "Axia", price: 38600 },
-  { id: "ativa", name: "Ativa", price: 62500 },
-  { id: "alza", name: "Alza", price: 62500 },
-];
+import { cars } from "../data.js";
+
+export const DEFAULT_CAR_MODELS = cars.map(({ id, name, price }) => ({
+  id,
+  name,
+  price,
+}));
 
 export const formatRM = (value) =>
   `RM ${new Intl.NumberFormat("en-MY", {

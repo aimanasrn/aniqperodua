@@ -67,13 +67,13 @@ test("invalid inputs are rejected instead of producing negative or NaN estimates
   }
 });
 
-test("all five requested models have the supplied mock prices", () => {
+test("all five models use the published reference starting prices", () => {
   assert.deepEqual(
     DEFAULT_CAR_MODELS.map(({ name, price }) => [name, price]),
     [
       ["Myvi", 46500],
-      ["Bezza", 35800],
-      ["Axia", 38600],
+      ["Bezza", 34580],
+      ["Axia", 22000],
       ["Ativa", 62500],
       ["Alza", 62500],
     ],

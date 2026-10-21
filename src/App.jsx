@@ -1,43 +1,39 @@
 import { MotionConfig } from "framer-motion";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
+import { Route, Routes } from "react-router";
 import Header from "./components/Header";
-import Hero from "./components/Hero";
-import TrustHighlights from "./components/TrustHighlights";
-import About from "./components/About";
-import CarCatalogue from "./components/CarCatalogue";
-import Promotions from "./components/Promotions";
-import LoanCalculator from "./components/LoanCalculator";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
 
-const DeliveryGallery = lazy(() => import("./components/DeliveryGallery"));
+const HomePage = lazy(() => import("./pages/HomePage"));
+const CarDetailPage = lazy(() => import("./pages/CarDetailPage"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 
 export default function App() {
+  useEffect(() => {
+    const previous = window.history.scrollRestoration;
+    window.history.scrollRestoration = "manual";
+    return () => {
+      window.history.scrollRestoration = previous;
+    };
+  }, []);
   return (
     <MotionConfig reducedMotion="user">
       <a className="skip-link" href="#main">
         Langkau ke kandungan
       </a>
       <Header />
-      <main id="main">
-        <Hero />
-        <TrustHighlights />
-        <About />
-        <CarCatalogue />
-        <LoanCalculator />
-        <Promotions />
-        <Suspense
-          fallback={
-            <div className="container py-16 text-sm" role="status">
-              Memuatkan galeri…
-            </div>
-          }
-        >
-          <DeliveryGallery />
-        </Suspense>
-        <Contact />
-      </main>
-      <Footer />
+      <Suspense
+        fallback={
+          <main id="main" className="container page-loading" role="status">
+            Memuatkan halaman…
+          </main>
+        }
+      >
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/catalog/:modelId" element={<CarDetailPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Suspense>
     </MotionConfig>
   );
 }

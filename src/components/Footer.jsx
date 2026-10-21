@@ -1,16 +1,17 @@
 import { Instagram, Phone, ArrowUp } from "lucide-react";
 import { advisor } from "../data";
 import { Reveal, TikTokIcon, WhatsAppButton } from "./UI";
+import { Link } from "react-router";
 
-export default function Footer() {
+export default function Footer({ whatsappMessage }) {
   return (
     <>
       <footer className="site-footer">
         <Reveal className="container">
           <div className="footer-main">
-            <a href="#" className="brand footer-brand">
+            <Link to="/" className="brand footer-brand">
               EN <span>ANIQ.</span>
-            </a>
+            </Link>
             <p>Perjalanan baharu anda bermula di sini.</p>
             <div className="footer-socials">
               <a
@@ -29,7 +30,7 @@ export default function Footer() {
               >
                 <TikTokIcon size={19} />
               </a>
-              <a href="#" className="back-top" aria-label="Kembali ke atas">
+              <a href="#main" className="back-top" aria-label="Kembali ke atas">
                 <ArrowUp size={18} />
               </a>
             </div>
@@ -45,7 +46,9 @@ export default function Footer() {
           <Phone size={19} />
           Call Now
         </a>
-        <WhatsAppButton>WhatsApp En Aniq</WhatsAppButton>
+        <WhatsAppButton message={whatsappMessage}>
+          WhatsApp En Aniq
+        </WhatsAppButton>
       </Reveal>
     </>
   );

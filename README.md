@@ -16,11 +16,15 @@ npm run build
 npm run preview
 ```
 
-Deploy the generated `dist/` directory to any static host. No API keys or backend are needed.
+Deploy the generated `dist/` directory to any static host. No API keys or backend are needed. React Router serves `/catalog/myvi`, `/catalog/bezza`, `/catalog/axia`, `/catalog/ativa` and `/catalog/alza`. The included `vercel.json` and `public/_redirects` provide SPA fallbacks for direct links and refreshes on Vercel and hosts supporting `_redirects` (Netlify/Cloudflare Pages). On other hosts, configure unknown application paths to serve `index.html`.
 
 ## Structure
 
 - `src/data.js`: advisor details, vehicle data and encoded WhatsApp link helper.
+- `src/pages/HomePage.jsx`: original landing page, loaded independently from catalogue detail pages.
+- `src/pages/CarDetailPage.jsx`: reusable detail page for all five models, with variant selection, specifications, safety, benefits, reference prices, brochures, test-drive enquiries, financing and FAQs. `?variant=av` preserves the selected variant on refresh; selection updates specs, price, calculator and WhatsApp messages together.
+- `src/data/vehicles.js`: variant-level model information and official sources, checked 21 October 2026. Catalogue and calculator starting prices use this same reference data. See [catalogue detail documentation](docs/catalogue-details.md).
+- `src/lib/usePageNavigation.js`: page titles, descriptions, section scrolling and browser Back/Forward scroll restoration.
 - `src/components/Header.jsx`: responsive navigation and persistent theme toggle.
 - `src/components/Hero.jsx`: rotating headline, reflective advisor portrait card and quick contact links. The card uses `ReflectiveCard.jsx` with custom content, a subtle reflection overlay and reduced-motion-aware hover tilt.
 - `src/components/TrustHighlights.jsx`: experience and service highlights.
@@ -42,7 +46,7 @@ See [component integration instructions](docs/components-integration.md) for pla
 
 ## Content to confirm before public launch
 
-The supplied prices, monthly instalments, stock statuses and promotion packages are mock data, explicitly labelled on the page. Update `src/data.js` after confirming actual offers. No financing approval is guaranteed. Official showroom hours were not provided, so the contact section directs visitors to confirm hours with the advisor.
+Prices now use Perodua's published reference variant prices, checked 21 October 2026 (OTR Peninsular Malaysia, sales tax included, insurance excluded). Confirm them with the advisor before launch and update `src/data/vehicles.js` when prices or specifications change. Monthly instalments are illustrative estimates; stock statuses and promotion packages remain sample content. No financing approval is guaranteed. Official showroom hours were not provided, so the contact section directs visitors to confirm hours with the advisor.
 
 The hero and profile thumbnail use an AI-enhanced professional portrait based on the supplied photograph of En Aniq. The showroom background is generated, not a photograph of this specific showroom. Vehicle catalogue images were downloaded from Perodua's official website; confirm permission for public use. This is the advisor's personal site, not Perodua's corporate website.
 

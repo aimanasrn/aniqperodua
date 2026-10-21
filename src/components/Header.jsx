@@ -4,9 +4,11 @@ import { Sun, Moon, Menu, X, Phone, ArrowUpRight } from "lucide-react";
 import { advisor } from "../data";
 import { Reveal, WhatsAppButton } from "./UI";
 import { REVEAL_TRANSITION } from "../lib/motion";
+import { Link, useNavigate } from "react-router";
 
 export default function Header() {
   const reducedMotion = useReducedMotion();
+  const navigate = useNavigate();
   const [dark, setDark] = useState(() =>
     document.documentElement.classList.contains("dark"),
   );
@@ -25,16 +27,9 @@ export default function Header() {
     const href = pendingSection.current;
     pendingSection.current = null;
     if (!href) return;
-    // Scroll after the exiting menu and its focused link leave the DOM.
+    // Navigate after the exiting menu and its focused link leave the DOM.
     requestAnimationFrame(() => {
-      const section = document.getElementById(href.slice(1));
-      if (!section) return;
-      if (window.location.hash !== href)
-        window.history.pushState(null, "", href);
-      section.scrollIntoView({
-        behavior: reducedMotion ? "instant" : "smooth",
-        block: "start",
-      });
+      navigate(href);
     });
   }
   function toggleTheme() {
@@ -48,26 +43,26 @@ export default function Header() {
     }
   }
   const links = [
-    ["Tentang Saya", "#tentang-saya"],
-    ["Model Perodua", "#model"],
-    ["Promosi", "#promosi"],
-    ["Hubungi & Lokasi", "#lokasi"],
+    ["Tentang Saya", "/#tentang-saya"],
+    ["Model Perodua", "/#model"],
+    ["Promosi", "/#promosi"],
+    ["Hubungi & Lokasi", "/#lokasi"],
   ];
   return (
     <header className="site-header">
       <Reveal className="container header-inner" offset={8}>
-        <a href="#" className="brand" aria-label="En Aniq, kembali ke atas">
+        <Link to="/" className="brand" aria-label="En Aniq, kembali ke atas">
           EN{" "}
           <span>
             ANIQ<span className="brand-dot">.</span>
           </span>
           <small>14 TAHUN PENGALAMAN</small>
-        </a>
+        </Link>
         <nav className="desktop-nav" aria-label="Navigasi utama">
           {links.map(([label, href]) => (
-            <a key={href} href={href}>
+            <Link key={href} to={href}>
               {label}
-            </a>
+            </Link>
           ))}
         </nav>
         <div className="header-actions">
@@ -125,14 +120,14 @@ export default function Header() {
               aria-label="Navigasi mudah alih"
             >
               {links.map(([label, href]) => (
-                <a
+                <Link
                   key={href}
-                  href={href}
+                  to={href}
                   onClick={(event) => closeMenuAndNavigate(event, href)}
                 >
                   {label}
                   <ArrowUpRight size={17} />
-                </a>
+                </Link>
               ))}
               <WhatsAppButton />
             </nav>

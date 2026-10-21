@@ -364,9 +364,9 @@ export default function LoanCalculator({
       >
         <Info size={15} className="mt-1 shrink-0" aria-hidden="true" />
         <span>
-          Simulasi kadar rata dengan harga contoh. Bukan tawaran pembiayaan;
-          kadar, kelulusan, caj dan kaedah pengiraan sebenar tertakluk kepada
-          bank. Tidak termasuk insurans dan caj tambahan.
+          Simulasi kadar rata berdasarkan harga rujukan. Bukan tawaran
+          pembiayaan; kadar, kelulusan, caj dan kaedah pengiraan sebenar
+          tertakluk kepada bank. Tidak termasuk insurans dan caj tambahan.
         </span>
       </Reveal>
     </section>

@@ -24,7 +24,7 @@ The sections can be linked with `#loan-calculator` and `#delivery-gallery`. Keep
 
 Full source: `src/components/LoanCalculator.jsx`.
 
-The component imports `src/lib/loan.js`, which provides the default five mock model prices, money formatting, the pure calculation function and the encoded WhatsApp quote builder. Copy that helper too if moving the component to another app.
+The component imports `src/lib/loan.js`, which provides the default five reference model prices, money formatting, the pure calculation function and the encoded WhatsApp quote builder. Defaults follow the catalogue data in `src/data.js` and `src/data/vehicles.js`; copy those files too if moving the component to another app, or replace the default-model import with your own data.
 
 Defaults: Myvi, 10% deposit, 9 years, 3.2% annual flat rate. Percent presets track the model price when the model changes; manually entered deposits remain the same RM amount and are validated against the new price.
 
@@ -53,7 +53,7 @@ Monthly instalment = (Principal + Total interest) / (Years × 12)
 
 For Myvi at RM46,500, deposit RM4,650, 9 years and 3.2%, the principal is RM41,850, interest RM12,052.80 and monthly estimate RM499.10. Calculations retain precision internally and display two decimal places. Deposits accept up to two decimal places. Invalid or blank inputs hide the estimate and remove the quote link's destination. Zero interest and full-price deposits are handled explicitly.
 
-This is an illustrative **flat-rate** calculator using supplied mock prices and a sample rate, not a bank quote or effective-rate calculation. Actual financing methods, fees, rates and approvals may differ. This is labelled in the UI; no insurance or additional fees are included. [Maybank's calculator guidance](https://www.maybank2u.com.my/maybank2u/malaysia/en/personal/loans/hire_purchase_loan_listing.page?componentID=1505849728033&submit=true) likewise distinguishes indicative estimates from offers of finance.
+This is an illustrative **flat-rate** calculator using reference prices and a sample rate, not a bank quote or effective-rate calculation. Actual financing methods, fees, rates and approvals may differ. This is labelled in the UI; no insurance or additional fees are included. [Maybank's calculator guidance](https://www.maybank2u.com.my/maybank2u/malaysia/en/personal/loans/hire_purchase_loan_listing.page?componentID=1505849728033&submit=true) likewise distinguishes indicative estimates from offers of finance.
 
 ## DeliveryGallery — Galeri Kenangan
 
