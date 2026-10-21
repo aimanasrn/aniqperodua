@@ -1,6 +1,13 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { MessageCircle, ArrowUpRight } from "lucide-react";
 import { whatsappUrl } from "../data";
+import { getRevealMotion } from "../lib/motion";
+
+const revealElements = {
+  div: motion.div,
+  p: motion.p,
+  a: motion.a,
+};
 
 export function WhatsAppButton({
   children = "WhatsApp En Aniq",
@@ -23,18 +30,25 @@ export function WhatsAppButton({
   );
 }
 
-export function Reveal({ children, className = "", delay = 0 }) {
+export function Reveal({
+  as = "div",
+  children,
+  className = "",
+  delay = 0,
+  offset = 18,
+  ...props
+}) {
   const reducedMotion = useReducedMotion();
+  const Element = revealElements[as] ?? motion.div;
   return (
-    <motion.div
+    <Element
+      {...props}
+      {...getRevealMotion(reducedMotion, { delay, offset })}
+      data-scroll-reveal=""
       className={className}
-      initial={reducedMotion ? false : { opacity: 0, y: 18 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.08 }}
-      transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
-    </motion.div>
+    </Element>
   );
 }
 

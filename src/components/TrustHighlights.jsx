@@ -12,17 +12,17 @@ const highlights = [
 export default function TrustHighlights() {
   return (
     <div className="container">
-      <Reveal className="trust-strip">
-        {highlights.map(([Icon, title, description]) => (
-          <div className="trust-item" key={title}>
+      <div className="trust-strip">
+        {highlights.map(([Icon, title, description], index) => (
+          <Reveal className="trust-item" key={title} delay={index * 0.06}>
             <Icon size={26} strokeWidth={1.6} aria-hidden="true" />
             <div>
               <strong>{title}</strong>
               <span>{description}</span>
             </div>
-          </div>
+          </Reveal>
         ))}
-      </Reveal>
+      </div>
     </div>
   );
 }

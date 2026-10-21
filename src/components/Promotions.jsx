@@ -23,8 +23,8 @@ export default function Promotions() {
       className="container promotions"
       aria-labelledby="promotion-heading"
     >
-      <Reveal className="promotion-panel">
-        <div className="promotion-copy">
+      <div className="promotion-panel">
+        <Reveal className="promotion-copy">
           <SectionLabel light>PROMOSI & REBAT</SectionLabel>
           <h2 id="promotion-heading">
             Lebih berbaloi.
@@ -38,18 +38,19 @@ export default function Promotions() {
           <WhatsAppButton message="Hi En Aniq, boleh kongsikan promosi bulan ini, rebat, bonus trade-in dan pakej hadiah untuk Perodua?">
             Semak promosi bulan ini
           </WhatsAppButton>
-        </div>
+        </Reveal>
         <div className="promotion-extras">
           <div className="gift-grid">
-            {gifts.map(([Icon, title, subtitle]) => (
-              <div className="gift-item" key={title}>
+            {gifts.map(([Icon, title, subtitle], index) => (
+              <Reveal className="gift-item" key={title} delay={index * 0.06}>
                 <Icon size={27} strokeWidth={1.5} />
                 <strong>{title}</strong>
                 <span>{subtitle}</span>
-              </div>
+              </Reveal>
             ))}
           </div>
-          <a
+          <Reveal
+            as="a"
             className="trade-in"
             href={whatsappUrl(
               "Hi En Aniq, saya nak trade-in kereta lama untuk Perodua baharu. Boleh bantu buat penilaian?",
@@ -62,12 +63,12 @@ export default function Promotions() {
               Ada kereta lama? <strong>Jom semak nilai trade-in.</strong>
             </span>
             <ArrowUpRight size={18} />
-          </a>
-          <p className="promotion-note">
+          </Reveal>
+          <Reveal as="p" className="promotion-note">
             Contoh pakej hadiah. Ketersediaan dan terma tawaran perlu disahkan.
-          </p>
+          </Reveal>
         </div>
-      </Reveal>
+      </div>
     </section>
   );
 }

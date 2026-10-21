@@ -3,18 +3,23 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Check, Info, MessageCircle } from "lucide-react";
 import { cars, currency, whatsappUrl } from "../data";
 import { Reveal, SectionLabel } from "./UI";
+import { getRevealMotion } from "../lib/motion";
 
 const filters = ["Semua", "Hatchback", "Sedan", "SUV", "MPV"];
 
 function CarCard({ car, index, filtered }) {
   const reduced = useReducedMotion();
+  const revealMotion = getRevealMotion(reduced, { delay: index * 0.025 });
   return (
     <motion.article
+      {...revealMotion}
+      data-scroll-reveal=""
       layout={!reduced}
-      initial={reduced ? false : { opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.97 }}
-      transition={{ duration: 0.25, delay: index * 0.025 }}
+      exit={{ opacity: 0, scale: 0.97, transition: { duration: 0.25 } }}
+      transition={{
+        ...revealMotion.transition,
+        layout: { duration: 0.25 },
+      }}
       className={`car-card ${!filtered && index > 2 ? "car-card-wide" : ""}`}
     >
       <div className="car-visual">
@@ -153,14 +158,14 @@ export default function CarCatalogue() {
           ))}
         </AnimatePresence>
       </div>
-      <p className="catalogue-note">
+      <Reveal as="p" className="catalogue-note">
         <Info size={14} />
         <span>
           Harga, ansuran dan status stok ialah data contoh. Ansuran sebenar
           tertakluk kepada varian, deposit, tempoh pembiayaan dan kelulusan
           bank. Sahkan tawaran dengan En Aniq.
         </span>
-      </p>
+      </Reveal>
     </section>
   );
 }
